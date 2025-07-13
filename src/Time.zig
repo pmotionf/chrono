@@ -99,14 +99,9 @@ pub fn signedDurationSince(this: @This(), other: @This()) i64 {
 
 pub fn format(
     this: @This(),
-    comptime fmt: []const u8,
-    options: std.fmt.FormatOptions,
-    writer: anytype,
+    writer: *std.Io.Writer,
 ) !void {
-    _ = fmt;
-    _ = options;
-
-    try std.fmt.format(writer, "{:0>2}:{:0>2}:{:0>2}", .{ this.hour(), this.minute(), this.second() });
+    try writer.print("{:0>2}:{:0>2}:{:0>2}", .{ this.hour(), this.minute(), this.second() });
 }
 
 pub const MAX_HOURS = 24;
